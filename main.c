@@ -3,14 +3,15 @@
 int main()
 {
 	int w;
-	char *buff = "#Simple_Shell$ ";
+	char *buff;
 
 	while (1)
 	{
-		w = write(STDOUT_FILENO, buff, 15);
+		w = write(STDOUT_FILENO, "#Simple_Shell$ ", 15);
 		if (w == -1)
 			return (1);
-		get_input();
+		buff = get_input();
+		exec(buff);
 	}
 	return (0);
 }

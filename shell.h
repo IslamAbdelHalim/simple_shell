@@ -6,5 +6,7 @@
 #include <stdio.h>
 #include<sys/wait.h>
 
-int get_input(void);
+char *get_input(void);
+int exec(char *buff);
+
 #endif

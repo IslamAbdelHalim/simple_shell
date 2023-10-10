@@ -1,13 +1,10 @@
 #include "shell.h"
 
-int get_input()
+char *get_input()
 {
-	char *buff;
-	size_t n;
-	int bytes;
+	char *buff = NULL;
+	size_t n = 0;
 
-	buff = (char *)malloc(sizeof(char));
-	n = 1;
-	bytes = getline(&buff, &n, STDIN_FILENO);
-	return (bytes);
+	getline(&buff, &n, stdin);
+	return (buff);
 }
