@@ -1,9 +1,11 @@
 #include "shell.h"
 
-int exec(char *buff)
+void exec(__attribute__((unused)) char **buff)
 {
-	const char *buffer = buff;
-	char *const x[2] = {buff, NULL};
-	execve(buffer, x, NULL);
-	return (0);
+	int r;
+
+	const char *buffer = buff[0];
+	r = execve(buffer, buff, NULL);
+	perror("./shell");
+	exit(1);
 }

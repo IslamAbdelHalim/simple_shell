@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include<sys/wait.h>
-
-char *get_input(void);
-int exec(char *buff);
+#include <string.h>
+char *get_input(char *);
+void exec(__attribute__((unused)) char **buff);
 
 #endif
