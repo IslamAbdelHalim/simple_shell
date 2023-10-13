@@ -1,22 +1,48 @@
 #include "shell.h"
 
-int main()
+/**
+ * main - Entry point
+ *
+ * Return: 0 if sucess
+*/
+
+int main(void)
 {
-	int w;
-        pid_t pid;
-	char *buff[2], *buffer;
+	char *buff; /*The input*/
+	pid_t pid; /*process id*/
+	char **argv; /*The array of argument*/
+	int argc, i;
+	char del[] = {" "}; /*delimeter*/
+	char *tokens;
 
 	while (1)
 	{
-		w = write(STDOUT_FILENO, "#Simple_Shell$ ", 15);
-		if (w == -1)
-			return (1);
+		/*print a promt*/
+		write(STDOUT_FILENO, "#Simple_Shell$ ", 15);
+		/*Create a process*/
 		pid = fork();
-		if (pid == 0)
+		wif (pid == 0)
 		{
-			buff[0] = get_input(buffer);
-			buff[1] = NULL;
-			exec(buff);
+			/*Get the input*/
+			buff = get_input(buff);
+			/*Parse the input*/
+			tokens = strtok(buff, del);
+			argc = 0;
+			argv = malloc(sizeof(char *) * 100);
+			while (tokens != NULL)
+			{
+				argv[argc] = malloc(sizeof(char) * (strlen(tokens) + 1));
+				strcpy(argv[argc], tokens);
+				argc++;
+				tokens = strtok(NULL, del);
+			}
+			printf("%s", argv[0]);
+			exec(argv);
+			for (i = 0; i < argc; i++)
+			{
+				free(argv[i]);
+			}
+			free(argv);
 		}
 		else
 			wait(NULL);
