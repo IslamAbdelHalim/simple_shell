@@ -28,9 +28,12 @@ int main(int argc, char *argv[])
 		}
 		/*parse the input*/
 
-		 arguments = parse_input(buff);
-		 if (arguments == NULL)
+		arguments = parse_input(buff);
+		if (arguments == NULL)
+		{
 			continue;
+		}
+
 		/*execution the command*/
 		exec(arguments, argv);
 		/*free the array of arguments*/

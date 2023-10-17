@@ -13,7 +13,7 @@ void exec(char **arguments, char **argv)
 	int r;
 	pid_t pid;
 	char *buffer = arguments[0];
-	
+
 	if (buffer == NULL)
 	{
 		perror(argv[0]);
