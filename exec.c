@@ -3,19 +3,37 @@
 /**
  * exec - function that execute the command
  *
- * @argv: The array of string (commands)
+ * @arguments: The array of arguments commend
+ *
+ * @argv: The array of parameters from input
 */
 
-void exec(__attribute__((unused)) char **argv)
+void exec(char **arguments, char **argv)
 {
 	int r;
-	const char *buffer = argv[0];
-
-	system(buffer);
-	r = execve(argv[0], argv, NULL);
-	if (r == -1)
+	pid_t pid;
+	char *buffer = arguments[0];
+	
+	if (buffer == NULL)
 	{
-		perror("./hsh");
-		exit(1);
+		perror(argv[0]);
+		freeArrStr(arguments);
+	}
+
+	/*Create a child process*/
+	pid = fork();
+	if (pid == 0)
+	{
+		r = execve(buffer, arguments, environ);
+		if (r == -1)
+		{
+			perror(argv[0]);
+			freeArrStr(arguments);
+			exit(1);
+		}
+	}
+	else
+	{
+		wait(NULL);
 	}
 }

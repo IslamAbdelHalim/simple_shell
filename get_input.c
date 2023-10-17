@@ -9,22 +9,42 @@
 char *get_input()
 {
 	char *buff;
-	size_t n = BUFF_SIZE, x;
+	size_t n = BUFF_SIZE;
+	ssize_t x, i = 0, bksp = 0;
 
-	buff = malloc(sizeof(char) * n);
+	/*Print The Prompt*/
+	if (isatty(0))
+		write(1, "#shell$ ", 8);
+	buff = malloc(sizeof(char) * BUFF_SIZE);
 	if (buff == NULL)
 	{
-		perror("Error\n");
+		perror("Error");
 		exit(1);
 	}
 	/*Get the input*/
 	x = getline(&buff, &n, stdin);
-	/*To Delete The newline*/
-	buff[strlen(buff) - 1] = '\0';
-	if (buff[0] == EOF)
-		printf("Exit");
-	if (x <= 0)
+
+	if (x == -1)
+	{
+		free(buff);
 		return (NULL);
+	}
+	else if (x > 1)
+	{
+		for (; i < x - 1; i++)
+		{
+			if (buff[i] == ' ')
+				bksp++;
+			else if (buff[i] != ' ' && buff[i] != '\n' && buff[i] != '\t')
+				break;
+
+			if (bksp == (x - 1))
+			{
+				free(buff);
+				return (get_input());
+			}
+		}
+	}
 
 	/*return the input*/
 	return (buff);
