@@ -27,9 +27,7 @@ int main(int argc, char *argv[])
 			return (stat);
 		}
 		i++;
-
 		/*parse the input*/
-
 		arguments = parse_input(buff);
 		if (arguments == NULL)
 		{
