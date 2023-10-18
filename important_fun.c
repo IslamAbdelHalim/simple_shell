@@ -77,3 +77,18 @@ void _error(char *program, char *commend, int index)
 
 	free(num);
 }
+
+/**
+ * print_env - function that print environment
+*/
+
+void print_env()
+{
+	int i;
+
+	for (i = 0; environ[i]; i++)
+	{
+		write(1, environ[i], _strlen(environ[i]));
+		write(1, "\n", 1);
+	}
+}

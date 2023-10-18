@@ -33,5 +33,6 @@ char **parse_input(char *buff);
 int exec(char **arguments, char **argv, int index);
 char *getTheEnv(char *varName);
 char *getThePath(char *cmd);
+void print_env();
 
 #endif
