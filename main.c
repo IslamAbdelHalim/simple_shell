@@ -33,7 +33,12 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
-
+		/*Handle env*/
+		if (_strcmp(argument, "env") == 0)
+		{
+			print_env();
+			return (0);
+		}
 		/*execution the command*/
 		exec(arguments, argv);
 		/*free the array of arguments*/
