@@ -4,7 +4,7 @@ int main()
 {
 	int w;
         pid_t pid;
-	char *buff[2], *buffer;
+	char *buff, *buffer = NULL;
 
 	while (1)
 	{
@@ -14,7 +14,7 @@ int main()
 		pid = fork();
 		if (pid == 0)
 		{
-			buff[0] = get_input(buffer);
+			buff = get_input(buffer);
 			buff[1] = NULL;
 			exec(buff);
 		}
