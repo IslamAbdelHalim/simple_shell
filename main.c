@@ -1,25 +1,43 @@
 #include "shell.h"
 
-int main()
+/**
+ * main - Entry point
+ *
+ * @argc: The arguemnt count
+ *
+ * @argv: The array of arrgumnt
+ *
+ * Return: 0 if sucess
+*/
+
+int main(int argc, char *argv[])
 {
-	int w;
-        pid_t pid;
-	char *buff, *buffer = NULL;
+	char *buff; /*The input*/
+	char **arguments; /*The array of argument*/
+	int stat = 0;
+	(void)argc;
 
 	while (1)
 	{
-		w = write(STDOUT_FILENO, "#Simple_Shell$ ", 15);
-		if (w == -1)
-			return (1);
-		pid = fork();
-		if (pid == 0)
+		/*Get The Input*/
+		buff = get_input();
+		if (buff == NULL)
 		{
-			buff = get_input(buffer);
-			buff[1] = NULL;
-			exec(buff);
+			free(buff);
+			return (stat);
 		}
-		else
-			wait(NULL);
+		/*parse the input*/
+
+		arguments = parse_input(buff);
+		if (arguments == NULL)
+		{
+			continue;
+		}
+
+		/*execution the command*/
+		exec(arguments, argv);
+		/*free the array of arguments*/
+		freeArrStr(arguments);
 	}
 	return (0);
 }
