@@ -7,6 +7,8 @@
  *
  * @argv: The array of parameters from input
  *
+ * @index: The counter
+ *
  * Return: The exit value
 */
 
@@ -16,6 +18,7 @@ int exec(char **arguments, char **argv, int index)
 	pid_t pid;
 	int stat;
 	char *buffer = getThePath(arguments[0]);
+
 	if (buffer == NULL)
 	{
 		_error(argv[0], buffer, index);

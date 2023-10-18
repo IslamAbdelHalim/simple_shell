@@ -67,7 +67,7 @@ void _error(char *program, char *commend, int index)
 	char *num;
 
 	num = _itoa(index);
-	
+
 	write(1, program, _strlen(program));
 	write(1, ": ", 2);
 	write(1, num, _strlen(num));
@@ -82,7 +82,7 @@ void _error(char *program, char *commend, int index)
  * print_env - function that print environment
 */
 
-void print_env()
+void print_env(void)
 {
 	int i;
 

@@ -42,15 +42,12 @@ char *getThePath(char *cmd)
 	int lendir, lencmd, i;
 	struct stat st;
 
-	/*check if the cmd enter by the path (/bin/ls)*/
 	for (i = 0; cmd[i]; i++)
 	{
 		if (cmd[i] == '/')
 		{
 			if (stat(cmd, &st) == 0)
-			{
 				return (_strdup(cmd));
-			}
 			return (NULL);
 		}
 	}
@@ -71,7 +68,6 @@ char *getThePath(char *cmd)
 		_strcpy(commend, directory);
 		_strcat(commend, "/");
 		_strcat(commend, cmd);
-
 		if (stat(commend, &st) == 0)
 		{
 			return (commend);

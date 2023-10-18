@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		/*Handle env*/
-		if (_strcmp(argument, "env") == 0)
+		if (_strcmp(arguments[0], "env") == 0)
 		{
 			print_env();
 			return (0);
