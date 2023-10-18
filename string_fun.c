@@ -59,18 +59,17 @@ char *_strdup(char *str)
 
 int _strcmp(char *str1, char *str2)
 {
-	int comp;
+	int comp = 0;
 
-	comp = (int)*str1 - (int)*str2;
-	while (*str1 != '\0')
+	while (*str1)
 	{
-		if (str1 != str2)
+		if (*str1 != *str2)
 		{
+			comp = ((int)*str1 - 48) - ((int)*str2 - 48);
 			break;
 		}
 		str1++;
 		str2++;
-		comp = (int)*str1 - (int)*str2;
 	}
 	return (comp);
 }
@@ -97,5 +96,28 @@ char *_strcat(char *str1, char *str2)
 	{
 		str1[i++] = str2[j];
 	}
+	str1[i] = '\0';
+	return (str1);
+}
+
+/**
+ * _strcpy - function to copy string
+ *
+ * @str1: The string to copy to
+ *
+ * @str2: The string which copy
+ *
+ * Return: The poiner to the new string
+*/
+
+char *_strcpy(char *str1, char *str2)
+{
+	while (*str2 != '\0')
+	{
+		*str1 = *str2;
+		str1++;
+		str2++;
+	}
+	*str1 = '\0';
 	return (str1);
 }

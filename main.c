@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 {
 	char *buff; /*The input*/
 	char **arguments; /*The array of argument*/
-	int stat = 0;
+	int stat = 0, i = 0;
 	(void)argc;
 
 	while (1)
@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 			free(buff);
 			return (stat);
 		}
+		i++;
+
 		/*parse the input*/
 
 		arguments = parse_input(buff);
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 		}
 
 		/*execution the command*/
-		exec(arguments, argv);
+		exec(arguments, argv, i);
 		/*free the array of arguments*/
 		freeArrStr(arguments);
 	}

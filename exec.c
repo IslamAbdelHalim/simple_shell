@@ -6,18 +6,20 @@
  * @arguments: The array of arguments commend
  *
  * @argv: The array of parameters from input
+ *
+ * Return: The exit value
 */
 
-void exec(char **arguments, char **argv)
+int exec(char **arguments, char **argv, int index)
 {
 	int r;
 	pid_t pid;
-	char *buffer = arguments[0];
-
+	int stat;
+	char *buffer = getThePath(arguments[0]);
 	if (buffer == NULL)
 	{
-		perror(argv[0]);
-		freeArrStr(arguments);
+		_error(argv[0], buffer, index);
+		return (127);
 	}
 
 	/*Create a child process*/
@@ -27,13 +29,16 @@ void exec(char **arguments, char **argv)
 		r = execve(buffer, arguments, environ);
 		if (r == -1)
 		{
-			perror(argv[0]);
 			freeArrStr(arguments);
+			free(buffer);
 			exit(1);
 		}
 	}
 	else
 	{
-		wait(NULL);
+		waitpid(pid, &stat, 0);
+		free(buffer);
 	}
+
+	return (WEXITSTATUS(stat));
 }
