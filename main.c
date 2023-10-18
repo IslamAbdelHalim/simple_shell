@@ -39,7 +39,14 @@ int main(int argc, char *argv[])
 		if (_strcmp(arguments[0], "env") == 0)
 		{
 			print_env();
-			return (0);
+			freeArrStr(arguments);
+			continue;
+		}
+		if (_strcmp(arguments[0], "exit") == 0)
+		{
+			freeArrStr(arguments);
+			stat = WEXITSTATUS(stat);
+			exit(stat);
 		}
 		/*execution the command*/
 		exec(arguments, argv, i);
