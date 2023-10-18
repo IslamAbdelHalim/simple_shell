@@ -41,7 +41,8 @@ int exec(char **arguments, char **argv, int index)
 	{
 		waitpid(pid, &stat, 0);
 		free(buffer);
+		stat = WEXITSTATUS(stat);
 	}
 
-	return (WEXITSTATUS(stat));
+	return (stat);
 }

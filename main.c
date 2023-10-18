@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 		if (_strcmp(arguments[0], "exit") == 0)
 		{
 			freeArrStr(arguments);
-			stat = WEXITSTATUS(stat);
 			exit(stat);
 		}
 		/*execution the command*/
